@@ -28,17 +28,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+// modules
+fe.load_module("fade")
+
 class UserConfig {
     </
-        label="SpinWheel",
+        label="SpinWheel Artwork",
         help="The artwork to spin",
         options="marquee,flyer,wheel"
     /> orbit_art="wheel";
     </
-        label="Mask",
+        label="Enable Wheel Mask",
         help="Make background behind the SpinWheel darker.",
         options="Yes,No"
     /> enable_Mask="Yes";
+	</
+		label="Enable crt shader effect",
+		help="CRT effect uses shader",
+		options="Yes,No",
+	/> enable_crt="Yes";
     </
         label="Transition Time",
         help="Time in milliseconds for wheel spin."
@@ -55,22 +63,42 @@ local fly = fe.layout.height;
 local flw = fe.layout.width;
 local flh = fe.layout.height;
 
-//snap placement
-//fe.add_image( "snap.png", 0, 0, flw, flh );
-
-//cart placement
-//fe.add_image( "cart.png", 0, 0, flw, flh );
+//create surface for snap
+local surface_snap = fe.add_surface( 640, 480 );
+local snap = FadeArt("snap", 0, 0, 640, 480, surface_snap);
+//snap.trigger = Transition.EndNavigation;
+snap.preserve_aspect_ratio = false;
 
 //video
-local snap = fe.add_artwork( "snap", flx*0.01, fly*0.32, 640*0.49, 480*0.88 );
-snap.pinch_x = 0;
-snap.pinch_y = 20;
-snap.skew_x = -3;
-snap.skew_y = -60;
-snap.rotation = -3;
-snap.preserve_aspect_ratio = false;
+//we need different values for the crt vs the non-crt, since the warping brings
+//in the edges so much.
+if ( my_config["enable_crt"] == "Yes" )
+{
+	surface_snap.set_pos(flx*0.0015, fly*0.295, 640*0.54, 480*0.99 );
+	surface_snap.pinch_x = 0;
+	surface_snap.pinch_y = 36;
+	surface_snap.skew_x = -25;
+	surface_snap.skew_y = -60;
+	surface_snap.rotation = -5;
+
+	local sh = fe.add_shader( Shader.VertexAndFragment, "crt.vert", "crt.frag" );
+	sh.set_param( "rubyInputSize", 640, 480 );
+    sh.set_param( "rubyOutputSize", ScreenWidth, ScreenHeight );
+    sh.set_param( "rubyTextureSize", 640, 480 );
+	sh.set_texture_param("rubyTexture"); 
+	surface_snap.shader = sh;
+}
+else
+{
+	surface_snap.set_pos(flx*0.01, fly*0.32, 640*0.49, 480*0.88 );
+	surface_snap.pinch_x = 0;
+	surface_snap.pinch_y = 20;
+	surface_snap.skew_x = -3;
+	surface_snap.skew_y = -60;
+	surface_snap.rotation = -3;
+}
 //helps with placement
-//snap.alpha = 150;
+//surface_snap.alpha = 150;
 
 //cart
 local cart = fe.add_artwork( "cart", flx*0.0822, fly*0.819, 158, 60 );
