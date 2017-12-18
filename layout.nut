@@ -63,6 +63,9 @@ local fly = fe.layout.height;
 local flw = fe.layout.width;
 local flh = fe.layout.height;
 
+//background
+fe.add_artwork( "bg.png", flx, fly, 0, 0 );
+
 //create surface for snap
 local surface_snap = fe.add_surface( 640, 480 );
 local snap = FadeArt("snap", 0, 0, 640, 480, surface_snap);
@@ -113,8 +116,6 @@ cart.preserve_aspect_ratio = false;
 
 //Image of overlay
 local overlay_top = fe.add_image( "overlay.png", 0, 0, flw, flh );
-//helps with placement
-//overlay_top.alpha = 100
 
 //box art
 local box = fe.add_artwork(
