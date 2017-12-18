@@ -44,7 +44,7 @@ class UserConfig {
     /> enable_Mask="Yes";
 	</
 		label="Enable crt shader effect",
-		help="CRT effect uses shader",
+		help="Add scanlines and CRT screen bulge using a shader.",
 		options="Yes,No",
 	/> enable_crt="Yes";
     </
