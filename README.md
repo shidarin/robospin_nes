@@ -50,7 +50,6 @@ Options
 `robospin_nes` exposes the following options:
 
 * SpinWheel Artwork: The artwork to spin
-* Enable Wheel Mask: Darkens the area behind the SpinWheel
 * Enable crt shader effect: Add scanlines and CRT screen bulge using a shader.
 * Transition Time: Time in milliseconds for wheel spin.
 
@@ -60,6 +59,10 @@ Changelog
 *New in version 1.0:*
 
 Initial release.
+
+*New in version 0.9:*
+
+Archive release to show bug with fancy transitions and shaders.
 
 License
 -------

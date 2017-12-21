@@ -37,11 +37,6 @@ class UserConfig {
         help="The artwork to spin",
         options="marquee,flyer,wheel"
     /> orbit_art="wheel";
-    </
-        label="Enable Wheel Mask",
-        help="Make background behind the SpinWheel darker.",
-        options="Yes,No"
-    /> enable_Mask="Yes";
 	</
 		label="Enable crt shader effect",
 		help="Add scanlines and CRT screen bulge using a shader.",
@@ -86,8 +81,8 @@ if ( my_config["enable_crt"] == "Yes" )
 
 	local sh = fe.add_shader( Shader.VertexAndFragment, "crt.vert", "crt.frag" );
 	sh.set_param( "rubyInputSize", 640, 480 );
-    sh.set_param( "rubyOutputSize", ScreenWidth, ScreenHeight );
-    sh.set_param( "rubyTextureSize", 640, 480 );
+	sh.set_param( "rubyOutputSize", ScreenWidth, ScreenHeight );
+	sh.set_param( "rubyTextureSize", 640, 480 );
 	sh.set_texture_param("rubyTexture"); 
 	surface_snap.shader = sh;
 }
@@ -122,13 +117,6 @@ local box = fe.add_artwork(
     "flyer", flx*0.18, fly*0.67, flw*0.15625, flh*0.277
 );
 box.preserve_aspect_ratio = true;
-
-//mask
-if ( my_config["enable_Mask"] == "Yes" )
-{
-	local mask = fe.add_image( "mask.png", 0, 0, flw, flx );
-}
-
 
 //wheel settings
 fe.load_module( "conveyor" );
