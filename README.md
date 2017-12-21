@@ -59,6 +59,7 @@ Changelog
 *New in version 1.0:*
 
 Initial release.
+Limit fancy transitions to non-CRT shader only
 
 *New in version 0.9:*
 

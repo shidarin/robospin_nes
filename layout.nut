@@ -201,7 +201,10 @@ local green = 255;
 local blue = 255;
 
 // Transitions
-fe.add_transition_callback( "fancy_transitions" );
+if ( my_config["enable_crt"] == "No" )
+{
+	fe.add_transition_callback( "fancy_transitions" );
+}
 
 function fancy_transitions( ttype, var, ttime ) {
  switch ( ttype )
