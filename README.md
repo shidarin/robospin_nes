@@ -28,7 +28,7 @@ Installation
 The simplest installation method is through git, from within your attract
 mode layout folder::
 
-    git clone https://github.com/shidarin/robospin_ngpc.git
+    git clone https://github.com/shidarin/robospin_nes.git
 
 This will create a `robospin_nes` folder inside your layout folder, and 
 you can now select `robospin_nes` as a theme for a display.
